@@ -1,0 +1,36 @@
+<div class="markdown-body">
+  <h1>Generate hash</h1>
+  <p>
+    <button onclick="generate()">Generate</button>
+    <button onclick="copy()">Copy</button>
+    <span id="done"></span>
+  </p>
+  <p><input id="input" /></p>
+</div>
+
+<style>
+  button {
+    width: 200px;
+    height: 40px;
+  }
+  input {
+    height: 40px;
+    width: 400px;
+    font-size: 30px;
+  }
+</style>
+
+<script>
+  function generate() {
+    var array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    var value = array[0].toString(16);
+    input.value = value;
+  }
+  function copy() {
+    var value = input.value;
+    input.select();
+    document.execCommand("copy");
+    done.innerText = `Copied ${value}`;
+  }
+</script>
